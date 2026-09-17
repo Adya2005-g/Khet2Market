@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Khet2Market connects farmers and FPOs with verified buyers through transparent market intelligence.">
+  <title>Khet2Market | From Farm to Market, Smarter.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    :root { --pico-font-family: "DM Sans", sans-serif; --pico-primary: #276749; --pico-primary-hover: #1f553b; --ink: #183227; --leaf: #276749; --mist: #f4f8f2; --gold: #eeae39; }
+    body { color: var(--ink); background: #fcfdf9; } .container { max-width: 1180px; }
+    nav { padding: .8rem 0; } nav ul:first-child strong { font-size: 1.25rem; color: var(--leaf); } .brand-mark { color: var(--gold); margin-right: .35rem; }
+    .hero { padding: 5.5rem 0 4rem; background: radial-gradient(circle at 90% 15%, #e6f2db 0, transparent 32%), linear-gradient(135deg, #f8fbf3, #edf5e9); overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: center; } .eyebrow { color: var(--leaf); font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    h1, h2 { font-family: "Playfair Display", serif; color: #153725; } h1 { font-size: clamp(2.5rem, 5vw, 4.45rem); line-height: 1.06; margin: .7rem 0 1.2rem; } h2 { font-size: clamp(1.9rem, 3vw, 2.7rem); }
+    .hero p { max-width: 630px; font-size: 1.15rem; line-height: 1.7; } .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.7rem; } .actions a { margin: 0; }
+    .farm-visual { min-height: 360px; padding: 2rem; border-radius: 28px; color: white; background: linear-gradient(145deg, #174e37, #398b49); box-shadow: 0 22px 50px #1b51342e; position: relative; isolation: isolate; overflow: hidden; } .farm-visual::before { content: ""; position: absolute; inset: auto -30px -70px; height: 230px; z-index: -1; background: repeating-radial-gradient(ellipse at 50% 100%, transparent 0 26px, #7bb957 28px 52px); }
+    .farm-visual small { color: #d6ecc8; } .farm-visual h3 { color: white; font-size: 2rem; margin-top: 1rem; } .crop-chip { display: inline-block; padding: .35rem .7rem; margin: .25rem; border: 1px solid #ffffff66; border-radius: 99px; background: #ffffff16; }
+    section { padding: 4.5rem 0; } .section-intro { max-width: 710px; margin-bottom: 2rem; } .section-intro p { color: #557064; }
+    .stat-grid, .card-grid, .user-grid { display: grid; gap: 1rem; grid-template-columns: repeat(4, 1fr); } .card-grid { grid-template-columns: repeat(3, 1fr); } .user-grid { grid-template-columns: repeat(3, 1fr); }
+    .stat, .feature-card, .user-card, .market-card, .step { margin: 0; padding: 1.35rem; border: 1px solid #deeadc; border-radius: 16px; background: white; box-shadow: 0 8px 22px #173b2410; } .stat strong { display: block; color: var(--leaf); font-size: 1.7rem; } .stat span { color: #61776b; font-size: .9rem; }
+    .muted-note { margin-top: 1rem; color: #718076; font-size: .8rem; } .problem { background: var(--mist); } .problem-list { columns: 2; margin: 1.5rem 0 0; } .problem-list li { margin: .7rem 0; }
+    .feature-icon { color: var(--leaf); font-size: 1.5rem; } .feature-card h3 { margin: .5rem 0; font-size: 1.1rem; } .feature-card p { color: #5f7468; font-size: .94rem; }
+    .process { display: grid; grid-template-columns: repeat(7, 1fr); align-items: center; gap: .5rem; } .step { min-height: 125px; text-align: center; display: grid; place-items: center; font-size: .9rem; font-weight: 700; } .arrow { color: var(--gold); font-size: 1.35rem; text-align: center; }
+    .dashboard { padding: 1.5rem; border-radius: 20px; background: #143d2b; color: white; } .dashboard h3, .dashboard p { color: white; } .market-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); } .market-card { color: var(--ink); } .market-card h4 { margin: 0; } .price { display: block; font-size: 1.35rem; font-weight: 700; margin: .6rem 0; } .trend { color: #187146; font-weight: 700; }
+    .insights { background: linear-gradient(135deg, #fdf6e6, #f5faed); } .insight-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; } .insight-list div { padding: 1rem; border-left: 4px solid var(--gold); background: #fff; border-radius: 0 10px 10px 0; }
+    .user-card { border-top: 4px solid var(--leaf); } .user-card h3 { color: var(--leaf); letter-spacing: .09em; font-size: .9rem; } .cta { background: #1c543a; color: white; text-align: center; } .cta h2, .cta p { color: white; } .cta .actions { justify-content: center; } .cta .secondary { border-color: white; color: white; }
+    footer { padding: 2.5rem 0; background: #112b20; color: #d8e6dc; } footer strong { color: white; } footer a { color: #d8e6dc; text-decoration: none; } .footer-row { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; } .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 850px) { .hero-grid { grid-template-columns: 1fr; } .stat-grid { grid-template-columns: repeat(2, 1fr); } .card-grid, .user-grid { grid-template-columns: 1fr; } .process { grid-template-columns: 1fr; } .arrow { transform: rotate(90deg); } .market-grid { grid-template-columns: 1fr; } nav ul:nth-child(2) li:not(:last-child) { display: none; } }
+    @media (max-width: 520px) { .stat-grid, .insight-list { grid-template-columns: 1fr; } .hero { padding-top: 3rem; } }
+  </style>
+</head>
+<body>
+  <header class="hero" id="home">
+    <nav class="container" aria-label="Main navigation">
+      <ul><li><strong><span class="brand-mark" aria-hidden="true">✦</span>Khet2Market</strong></li></ul>
+      <ul>
+        <li><a href="#home">Home</a></li><li><a href="#market-intelligence">Market Intelligence</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#farmers">For Farmers</a></li><li><a href="#buyers">For Buyers</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li><li><a href="{{ url_for('register') }}" role="button">Register</a></li>
+      </ul>
+    </nav>
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Smart India Hackathon 2026 · PS 26132</div>
+        <h1>Better Prices. Better Markets. Better Opportunities for Farmers.</h1>
+        <p>Khet2Market connects farmers and FPOs with verified buyers through market intelligence, transparent price discovery and smart market linkages.</p>
+        <div class="actions"><a href="{{ url_for('register') }}" role="button">Start Selling</a><a href="#market-intelligence" role="button" class="secondary outline">Explore Market Prices</a></div>
+      </div>
+      <aside class="farm-visual" aria-label="Agriculture marketplace illustration">
+        <small>CONNECTED AGRICULTURE</small><h3>Grow. Compare. Connect. Sell.</h3>
+        <p>Bring your produce closer to the right market.</p>
+        <div><span class="crop-chip">🌾 Grains</span><span class="crop-chip">🧅 Vegetables</span><span class="crop-chip">🥭 Fruits</span></div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="container" aria-labelledby="stats-heading">
+      <div class="eyebrow" id="stats-heading">Growing together</div>
+      <div class="stat-grid">
+        <article class="stat"><strong>10,000+</strong><span>Farmers</span></article><article class="stat"><strong>500+</strong><span>Verified Buyers</span></article><article class="stat"><strong>2,500+</strong><span>Produce Lots</span></article><article class="stat"><strong>₹5 Cr+</strong><span>Trade Value</span></article>
+      </div><p class="muted-note">Demo Platform Statistics — figures shown for prototype illustration.</p>
+    </section>
+
+    <section class="problem"><div class="container"><div class="section-intro"><div class="eyebrow">The challenge</div><h2>Farmers deserve clearer paths to the market.</h2><p>Price uncertainty and fragmented market access can leave growers without the information or negotiating power to make the most of their harvest.</p></div><ul class="problem-list"><li>Lack of transparent price information</li><li>Limited access to buyers</li><li>Dependence on intermediaries</li><li>Weak bargaining power</li><li>Post-harvest losses</li><li>Difficulty finding reliable buyers</li></ul></div></section>
+
+    <section class="container" aria-labelledby="solutions-heading"><div class="section-intro"><div class="eyebrow">The Khet2Market solution</div><h2 id="solutions-heading">A stronger link between farm gates and fair markets.</h2><p>One accessible platform helps stakeholders discover prices, connect with verified counterparts and manage a transaction with greater visibility.</p></div><div class="card-grid">
+      <article class="feature-card"><div class="feature-icon">◫</div><h3>Market Intelligence</h3><p>Compare nearby mandi prices and understand market movements before you sell.</p></article><article class="feature-card"><div class="feature-icon">⌘</div><h3>Smart Buyer Matching</h3><p>Find relevant buyer demand for the produce, volume and location you offer.</p></article><article class="feature-card"><div class="feature-icon">◉</div><h3>FPO Aggregation</h3><p>Bring farmer lots together to access larger opportunities and stronger terms.</p></article><article class="feature-card"><div class="feature-icon">✉</div><h3>Digital Offers</h3><p>Share, review and negotiate offers with a clear record for all parties.</p></article><article class="feature-card"><div class="feature-icon">↝</div><h3>Logistics Coordination</h3><p>Keep an eye on fulfilment from confirmed order through delivery.</p></article><article class="feature-card"><div class="feature-icon">✓</div><h3>Transparent Payments</h3><p>Track transaction and payment milestones with better visibility.</p></article>
+    </div></section>
+
+    <section id="how-it-works" class="problem"><div class="container"><div class="section-intro"><div class="eyebrow">Simple by design</div><h2>How it works</h2></div><div class="process" aria-label="Khet2Market process"><div class="step">1. Farmer Registers</div><div class="arrow" aria-hidden="true">→</div><div class="step">2. Check Market Prices</div><div class="arrow" aria-hidden="true">→</div><div class="step">3. List Produce</div><div class="arrow" aria-hidden="true">→</div><div class="step">4. Smart Buyer Matching</div><div class="arrow" aria-hidden="true">→</div><div class="step">5. Offer &amp; Negotiation</div><div class="arrow" aria-hidden="true">→</div><div class="step">6. Order Confirmation</div><div class="arrow" aria-hidden="true">→</div><div class="step">7. Logistics &amp; Payment</div></div></div></section>
+
+    <section id="market-intelligence" class="container" aria-labelledby="market-heading"><div class="section-intro"><div class="eyebrow">Market intelligence</div><h2 id="market-heading">A clearer view of produce prices.</h2><p>See an example of how a simple market snapshot can support price discovery.</p></div><div class="dashboard"><p class="eyebrow">Demo market values</p><h3>Today’s indicative price board</h3><div class="market-grid"><article class="market-card"><h4>Onion</h4><span class="price">₹2,450/Qtl</span><span class="trend">↗ +8.4%</span></article><article class="market-card"><h4>Tomato</h4><span class="price">₹1,850/Qtl</span><span class="trend">↗ +3.2%</span></article><article class="market-card"><h4>Soybean</h4><span class="price">₹4,720/Qtl</span><span class="trend">↗ +5.1%</span></article></div><p class="muted-note">Demo values only; not live market prices.</p></div></section>
+
+    <section class="insights"><div class="container"><div class="section-intro"><div class="eyebrow">Prototype Intelligence</div><h2>Smart Recommendations for Better Selling</h2><p>Prototype insights can help shape better decisions when combined with local knowledge and verified market information.</p></div><div class="insight-list"><div><strong>Price trend analysis</strong><br><small>Understand recent movement at a glance.</small></div><div><strong>Recommended selling window</strong><br><small>Explore timing cues for your produce.</small></div><div><strong>Buyer matching</strong><br><small>Prioritise potential demand matches.</small></div><div><strong>Demand insights</strong><br><small>View signals that support planning.</small></div></div></div></section>
+
+    <section class="container" aria-labelledby="people-heading"><div class="section-intro"><div class="eyebrow">Built for the ecosystem</div><h2 id="people-heading">One marketplace, three powerful roles.</h2></div><div class="user-grid"><article class="user-card" id="farmers"><h3>Farmer</h3><p>Sell produce to verified buyers.</p></article><article class="user-card"><h3>FPO</h3><p>Aggregate farmer produce and access larger markets.</p></article><article class="user-card" id="buyers"><h3>Buyer</h3><p>Source quality produce directly from farmers and FPOs.</p></article></div></section>
+
+    <section class="cta"><div class="container"><h2>Ready to connect your farm with better markets?</h2><p>Join the Khet2Market prototype and explore a more transparent way to trade.</p><div class="actions"><a href="{{ url_for('register_role', role='farmer') }}" role="button">Register as Farmer</a><a href="{{ url_for('register_role', role='buyer') }}" role="button" class="secondary outline">Register as Buyer</a><a href="{{ url_for('register_role', role='fpo') }}" role="button" class="secondary outline">Register as FPO</a></div></div></section>
+  </main>
+
+  <footer><div class="container footer-row"><div><strong>Khet2Market</strong><br><small>PS 26132 · Smart India Hackathon 2026</small></div><nav class="footer-links" aria-label="Footer navigation"><a href="#home">Home</a><a href="{{ url_for('login') }}">Login</a><a href="{{ url_for('register') }}">Register</a><a href="#solutions-heading">About</a></nav></div></footer>
+</body>
+</html>

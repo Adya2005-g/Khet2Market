@@ -1,0 +1,15 @@
+{% set role_name = 'Buyer' %}
+{% set intro = 'Source quality produce directly from farmers and FPOs.' %}
+{% set role_icon = '↝' %}
+{% set accent = '#23756c' %}
+{% set accent_dark = '#185a53' %}
+{% set tint = '#dff1ed' %}
+{% set role_fields %}
+  <label>Business Name<input name="business_name" type="text" required></label>
+  <label>Buyer Type<select name="buyer_type" required><option value="">Select buyer type</option><option>Wholesaler</option><option>Retailer</option><option>Processor</option><option>Exporter</option></select></label>
+  <label>Required Produce<input name="required_produce" type="text" required></label>
+  <label>Required Quantity<input name="required_quantity" type="text" placeholder="e.g. 50 quintals" required></label>
+  <label>Quality Requirement<input name="quality_requirement" type="text" required></label>
+  <label>Business Location<input name="business_location" type="text" required></label>
+{% endset %}
+{% include 'register_role.html' %}

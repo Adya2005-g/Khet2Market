@@ -1,0 +1,13 @@
+{% set role_name = 'Farmer' %}
+{% set intro = 'List your produce and find better market opportunities.' %}
+{% set role_icon = '🌾' %}
+{% set accent = '#3f8645' %}
+{% set accent_dark = '#2e6b35' %}
+{% set tint = '#e3f2dc' %}
+{% set role_fields %}
+  <label>Crop/Produce<input name="crop_produce" type="text" required></label>
+  <label>Farm Size<input name="farm_size" type="text" placeholder="e.g. 3 acres" required></label>
+  <label>Primary Market<input name="primary_market" type="text" required></label>
+  <label>Storage Available<select name="storage_available" required><option value="">Select availability</option><option>Yes</option><option>No</option></select></label>
+{% endset %}
+{% include 'register_role.html' %}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Log in to your Khet2Market account.">
+  <title>Login | Khet2Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    :root { --pico-font-family: "DM Sans", sans-serif; --pico-primary: #276749; --pico-primary-hover: #1f553b; --ink: #183227; --leaf: #276749; --gold: #eeae39; }
+    body { min-height: 100vh; background: #f7faf5; color: var(--ink); } main { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+    .brand-panel { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(2rem, 5vw, 5rem); overflow: hidden; color: white; background: linear-gradient(145deg, #123d2a, #358446); isolation: isolate; }
+    .brand-panel::after { content: ""; position: absolute; width: 130%; height: 44%; bottom: -12%; left: -15%; z-index: -1; border-radius: 50% 50% 0 0; background: repeating-radial-gradient(ellipse at 50% 100%, transparent 0 28px, #84be5e 30px 56px); opacity: .82; }
+    .brand { color: white; font-size: 1.3rem; font-weight: 700; text-decoration: none; } .brand-mark { color: var(--gold); margin-right: .35rem; }.brand-panel h1 { max-width: 560px; color: white; font-family: "Playfair Display", serif; font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1; margin: 0 0 1rem; }.brand-panel p { max-width: 510px; color: #e1f0dd; font-size: 1.15rem; line-height: 1.65; }.eyebrow { color: #d5e9bc; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }.crop-tags { display: flex; flex-wrap: wrap; gap: .55rem; }.crop-tags span { padding: .38rem .75rem; border: 1px solid #ffffff66; border-radius: 999px; background: #ffffff14; }
+    .login-panel { display: grid; place-items: center; padding: 2rem; }.login-card { width: min(100%, 470px); padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid #deeadc; border-radius: 20px; background: white; box-shadow: 0 18px 48px #163b2418; }.mobile-brand { display: none; color: var(--leaf); font-weight: 700; text-decoration: none; }.login-card h2 { margin: 1.25rem 0 .3rem; color: #153725; font-family: "Playfair Display", serif; font-size: 2.25rem; }.subtitle { margin: 0 0 1.6rem; color: #687b70; }
+    label { color: #355847; font-weight: 600; } input { margin-top: .42rem; }.password-wrap { position: relative; }.password-wrap input { padding-right: 4.8rem; }.password-toggle { position: absolute; right: .45rem; bottom: .52rem; width: auto; margin: 0; padding: .35rem .55rem; border: 0; color: var(--leaf); background: transparent; font-size: .82rem; font-weight: 700; box-shadow: none; }.password-toggle:hover { background: #edf6ec; }.form-options { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: .2rem 0 1.3rem; font-size: .88rem; }.form-options label { margin: 0; font-size: .88rem; }.form-options input { margin-right: .3rem; }.form-options a, .account-link a { color: var(--leaf); font-weight: 700; text-decoration: none; }
+    fieldset { margin: 1.5rem 0; padding: 0; border: 0; } legend { margin-bottom: .35rem; color: #355847; font-size: .92rem; font-weight: 700; }.role-help { margin: 0 0 .75rem; color: #74877a; font-size: .8rem; }.role-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; }.role-option { position: relative; display: block; margin: 0; padding: .75rem .3rem; border: 1px solid #d9e7d6; border-radius: 12px; text-align: center; cursor: pointer; font-size: .84rem; transition: transform .18s ease, border-color .18s ease, background .18s ease; }.role-option:hover { transform: translateY(-2px); border-color: #8bb67e; }.role-option input { position: absolute; opacity: 0; }.role-option span { display: block; margin-bottom: .25rem; font-size: 1.05rem; }.role-option:has(input:checked) { border-color: var(--leaf); background: #eff8eb; color: var(--leaf); box-shadow: inset 0 0 0 1px var(--leaf); }.role-status { margin: .75rem 0 0; padding: .65rem .75rem; border-radius: 9px; color: #557160; background: #f1f7ed; font-size: .8rem; }.role-status strong { color: var(--leaf); }.login-button { width: 100%; margin: 0; }.account-link { margin: 1.25rem 0 0; text-align: center; color: #63786b; font-size: .92rem; }
+    @media (max-width: 800px) { main { grid-template-columns: 1fr; }.brand-panel { display: none; }.login-panel { min-height: 100vh; background: linear-gradient(145deg, #f8fcf4, #eef6e9); }.mobile-brand { display: block; }.login-card { box-shadow: 0 14px 35px #163b2415; } }
+    @media (max-width: 390px) { .login-panel { padding: 1rem; }.login-card { padding: 1.3rem; }.form-options { align-items: flex-start; flex-direction: column; gap: .55rem; } }
+  </style>
+</head>
+<body>
+  <main>
+    <aside class="brand-panel" aria-label="About Khet2Market">
+      <a class="brand" href="{{ url_for('login') }}"><span class="brand-mark" aria-hidden="true">✦</span>Khet2Market</a>
+      <div>
+        <div class="eyebrow">Agricultural market linkages</div>
+        <h1>From Farm to Market, Smarter.</h1>
+        <p>Access market intelligence, verified buyers and transparent agricultural trade.</p>
+      </div>
+      <div class="crop-tags" aria-label="Agricultural produce categories"><span>🌾 Grains</span><span>🧅 Vegetables</span><span>🥭 Fruits</span></div>
+    </aside>
+
+    <section class="login-panel" aria-labelledby="login-heading">
+      <article class="login-card">
+        <a class="mobile-brand" href="{{ url_for('login') }}"><span class="brand-mark" aria-hidden="true">✦</span>Khet2Market</a>
+        <h2 id="login-heading">Welcome Back</h2>
+        <p class="subtitle">Login to your Khet2Market account</p>
+
+        <form method="POST" action="{{ url_for('login') }}">
+          <label for="identity">Mobile Number / Email
+            <input id="identity" name="identity" type="text" placeholder="Enter mobile number or email" autocomplete="username" required>
+          </label>
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" placeholder="Enter password" autocomplete="current-password" required>
+            <button class="password-toggle" type="button" aria-controls="password" aria-pressed="false">Show</button>
+          </div>
+
+          <div class="form-options">
+            <label for="remember"><input id="remember" name="remember" type="checkbox">Remember me</label>
+            <a href="#" aria-label="Forgot your password?">Forgot password?</a>
+          </div>
+
+          <fieldset>
+            <legend>Login as:</legend>
+            <p class="role-help">Choose the account type you registered with.</p>
+            <div class="role-options">
+              <label class="role-option"><input type="radio" name="role" value="farmer" checked><span aria-hidden="true">🌾</span>Farmer</label>
+              <label class="role-option"><input type="radio" name="role" value="fpo"><span aria-hidden="true">◉</span>FPO</label>
+              <label class="role-option"><input type="radio" name="role" value="buyer"><span aria-hidden="true">↝</span>Buyer</label>
+            </div>
+            <p class="role-status" id="role-status">You will continue to the <strong>Farmer dashboard</strong>.</p>
+          </fieldset>
+          <button class="login-button" id="login-button" type="submit">Continue as Farmer →</button>
+        </form>
+        <p class="account-link">Don't have an account? <a href="{{ url_for('register') }}">Create Account</a></p>
+      </article>
+    </section>
+  </main>
+  <script>
+    const passwordToggle = document.querySelector('.password-toggle');
+    const passwordInput = document.querySelector('#password');
+    passwordToggle.addEventListener('click', () => {
+      const showPassword = passwordInput.type === 'password';
+      passwordInput.type = showPassword ? 'text' : 'password';
+      passwordToggle.textContent = showPassword ? 'Hide' : 'Show';
+      passwordToggle.setAttribute('aria-pressed', String(showPassword));
+    });
+    const roleInputs = document.querySelectorAll('input[name="role"]');
+    const roleStatus = document.querySelector('#role-status');
+    const loginButton = document.querySelector('#login-button');
+    roleInputs.forEach((input) => input.addEventListener('change', () => {
+      const role = input.value === 'fpo' ? 'FPO' : input.value[0].toUpperCase() + input.value.slice(1);
+      roleStatus.innerHTML = `You will continue to the <strong>${role} dashboard</strong>.`;
+      loginButton.textContent = `Continue as ${role} →`;
+    }));
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% set role_name = 'FPO' %}
+{% set intro = 'Aggregate farmer produce and unlock larger market opportunities.' %}
+{% set role_icon = '◉' %}
+{% set accent = '#a66d18' %}
+{% set accent_dark = '#825411' %}
+{% set tint = '#fbebc7' %}
+{% set role_fields %}
+  <label>FPO Name<input name="fpo_name" type="text" required></label>
+  <label>Registration Number<input name="registration_number" type="text" required></label>
+  <label>Number of Farmers<input name="farmer_count" type="number" min="1" required></label>
+  <label>Major Produce<input name="major_produce" type="text" required></label>
+  <label class="wide">FPO Location<input name="fpo_location" type="text" required></label>
+{% endset %}
+{% include 'register_role.html' %}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="List agricultural produce on Khet2Market.">
+  <title>Add Produce | Khet2Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --forest:#153d2a; --leaf:#28734a; --leaf-dark:#1f5939; --lime:#e9f5df; --ink:#203a2b; --muted:#6b7f73; --line:#dce9da; --canvas:#f7faf5; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--canvas); font:15px/1.5 "DM Sans",sans-serif; } a { color:inherit; }
+    .topbar { min-height:70px; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.9rem clamp(1rem,4vw,3.5rem); border-bottom:1px solid var(--line); background:#fff; }.brand { display:flex; align-items:center; gap:.6rem; color:var(--forest); font-size:1.15rem; font-weight:700; text-decoration:none; }.brand-mark { display:grid; width:30px; height:30px; place-items:center; border-radius:9px; color:#fff; background:var(--leaf); }.back-link { color:var(--leaf); font-size:.88rem; font-weight:700; text-decoration:none; }.back-link:hover { text-decoration:underline; }
+    main { width:min(100% - 2rem,960px); margin:0 auto; padding:clamp(1.5rem,4vw,3.4rem) 0; }.page-heading { margin-bottom:1.5rem; }.eyebrow { margin:0 0 .32rem; color:var(--leaf); font-size:.73rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }.page-heading h1 { margin:0; color:var(--forest); font-family:"Playfair Display",serif; font-size:clamp(2rem,4vw,2.7rem); }.page-heading p:not(.eyebrow) { max-width:670px; margin:.5rem 0 0; color:var(--muted); }.flash-stack { display:grid; gap:.65rem; margin-bottom:1.1rem; }.flash { padding:.8rem 1rem; border:1px solid #cde4c5; border-radius:10px; color:#245435; background:#edf8e8; }
+    .form-card { border:1px solid var(--line); border-radius:17px; overflow:hidden; background:#fff; box-shadow:0 12px 30px #153d2a0b; }.form-section { padding:1.45rem clamp(1rem,3vw,2rem); border-bottom:1px solid #edf3eb; }.form-section:last-of-type { border-bottom:0; }.section-heading { display:flex; align-items:center; gap:.65rem; margin:0 0 1.1rem; color:var(--forest); font-size:1.05rem; }.section-icon { display:grid; width:30px; height:30px; place-items:center; border-radius:8px; color:var(--leaf); background:var(--lime); font-size:.9rem; }.hint { margin:-.65rem 0 1rem 2.6rem; color:var(--muted); font-size:.8rem; }.field-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem 1.15rem; }.field-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }.field.full { grid-column:1 / -1; } label { display:block; color:#365846; font-size:.87rem; font-weight:700; } .required::after { margin-left:.18rem; color:#bf4c3c; content:"*"; } input, select, textarea { width:100%; margin-top:.4rem; padding:.67rem .75rem; border:1px solid #cadcca; border-radius:9px; outline:0; color:var(--ink); background:#fff; font:inherit; transition:border-color .18s ease,box-shadow .18s ease; } textarea { min-height:104px; resize:vertical; } input:focus,select:focus,textarea:focus { border-color:var(--leaf); box-shadow:0 0 0 3px #28734a18; } .field-help,.field-error { display:block; margin-top:.32rem; font-size:.76rem; }.field-help { color:var(--muted); }.field-error { color:#b83d32; }.has-error input,.has-error select,.has-error textarea { border-color:#d26054; }.upload { position:relative; display:grid; place-items:center; min-height:134px; padding:1rem; border:1.5px dashed #adcdae; border-radius:11px; color:var(--muted); background:#fbfdf9; text-align:center; }.upload strong { display:block; margin-top:.35rem; color:var(--forest); }.upload input { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer; }.upload-name { margin:.5rem 0 0; color:var(--muted); font-size:.8rem; text-align:center; }.actions { display:flex; justify-content:flex-end; gap:.75rem; padding:1.15rem clamp(1rem,3vw,2rem); border-top:1px solid #edf3eb; background:#fcfdfb; }.button { display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:.65rem 1rem; border-radius:9px; font-weight:700; text-decoration:none; cursor:pointer; }.button-primary { border:1px solid var(--leaf); color:#fff; background:var(--leaf); }.button-primary:hover { border-color:var(--leaf-dark); background:var(--leaf-dark); }.button-secondary { border:1px solid #cce0c8; color:var(--leaf); background:#fff; }.button-secondary:hover { background:#f0f7ed; }.required-note { margin:0 auto 0 0; align-self:center; color:var(--muted); font-size:.78rem; }.required-note span { color:#bf4c3c; }
+    @media (max-width:680px) { .topbar { min-height:62px; }.field-grid,.field-grid.three { grid-template-columns:1fr; }.field.full { grid-column:auto; }.form-section { padding:1.2rem 1rem; }.actions { flex-wrap:wrap; padding:1rem; }.required-note { width:100%; }.button { flex:1; }.hint { margin-left:0; } }
+  </style>
+</head>
+<body>
+  {% set form_lot = lot|default({}) %}
+  {% set form_errors = errors|default({}) %}
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('farmer_dashboard') }}"><span class="brand-mark" aria-hidden="true">K</span>Khet2Market</a>
+    <a class="back-link" href="{{ url_for('farmer_my_produce') }}">← Back to My Produce</a>
+  </header>
+
+  <main>
+    <div class="page-heading"><p class="eyebrow">Marketplace listing</p><h1>List New Produce</h1><p>Add clear, accurate details to help the right buyers discover your harvest and make confident offers.</p></div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}<div class="flash-stack" aria-live="polite">{% for category, message in messages %}<div class="flash {{ category|default('', true) }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% endwith %}
+
+    <form class="form-card" method="POST" action="{{ url_for('farmer_create_lot') }}" enctype="multipart/form-data">
+      <section class="form-section" aria-labelledby="basic-heading">
+        <h2 class="section-heading" id="basic-heading"><span class="section-icon" aria-hidden="true">◫</span>Basic Information</h2>
+        <div class="field-grid">
+          <div class="field {% if form_errors.get('produce') %}has-error{% endif %}"><label class="required" for="produce">Product / Crop Name</label><input id="produce" name="produce" value="{{ form_lot.produce|default('') }}" placeholder="e.g. Onion" required>{% if form_errors.get('produce') %}<small class="field-error">{{ form_errors.get('produce') }}</small>{% endif %}</div>
+          <div class="field"><label for="category">Category</label><select id="category" name="category"><option value="">Select a category</option>{% for category in ['Vegetables', 'Fruits', 'Cereals & Grains', 'Pulses', 'Oilseeds', 'Spices', 'Other'] %}<option value="{{ category }}" {% if form_lot.category|default('') == category %}selected{% endif %}>{{ category }}</option>{% endfor %}</select></div>
+          <div class="field"><label for="variety">Variety</label><input id="variety" name="variety" value="{{ form_lot.variety|default('') }}" placeholder="e.g. Nashik Red"></div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="quantity-heading">
+        <h2 class="section-heading" id="quantity-heading"><span class="section-icon" aria-hidden="true">▦</span>Quantity</h2>
+        <div class="field-grid">
+          <div class="field {% if form_errors.get('quantity') %}has-error{% endif %}"><label class="required" for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="0.01" step="0.01" value="{{ form_lot.quantity|default('') }}" placeholder="e.g. 40" required>{% if form_errors.get('quantity') %}<small class="field-error">{{ form_errors.get('quantity') }}</small>{% endif %}</div>
+          <div class="field"><label class="required" for="unit">Unit</label><select id="unit" name="unit" required><option value="">Select unit</option>{% for unit in ['Quintal (Qtl)', 'Kilogram (kg)', 'Metric tonne (MT)', 'Bag', 'Crate'] %}<option value="{{ unit }}" {% if form_lot.unit|default('') == unit %}selected{% endif %}>{{ unit }}</option>{% endfor %}</select></div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="pricing-heading">
+        <h2 class="section-heading" id="pricing-heading"><span class="section-icon" aria-hidden="true">₹</span>Pricing</h2><p class="hint">Enter your expected rate per selected unit.</p>
+        <div class="field-grid">
+          <div class="field {% if form_errors.get('expected_price') %}has-error{% endif %}"><label class="required" for="expected_price">Expected Price (₹)</label><input id="expected_price" name="expected_price" type="number" min="0" step="0.01" value="{{ form_lot.expected_price|default('') }}" placeholder="e.g. 2450" required>{% if form_errors.get('expected_price') %}<small class="field-error">{{ form_errors.get('expected_price') }}</small>{% endif %}</div>
+          <div class="field"><label for="minimum_price">Minimum Acceptable Price (₹)</label><input id="minimum_price" name="minimum_price" type="number" min="0" step="0.01" value="{{ form_lot.minimum_price|default('') }}" placeholder="Optional"></div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="availability-heading">
+        <h2 class="section-heading" id="availability-heading"><span class="section-icon" aria-hidden="true">◷</span>Availability</h2>
+        <div class="field-grid three">
+          <div class="field {% if form_errors.get('harvest_date') %}has-error{% endif %}"><label class="required" for="harvest_date">Harvest Date</label><input id="harvest_date" name="harvest_date" type="date" value="{{ form_lot.harvest_date|default('') }}" required>{% if form_errors.get('harvest_date') %}<small class="field-error">{{ form_errors.get('harvest_date') }}</small>{% endif %}</div>
+          <div class="field"><label for="available_from">Available From</label><input id="available_from" name="available_from" type="date" value="{{ form_lot.available_from|default('') }}"></div>
+          <div class="field"><label for="available_until">Available Until</label><input id="available_until" name="available_until" type="date" value="{{ form_lot.available_until|default('') }}"></div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="location-heading">
+        <h2 class="section-heading" id="location-heading"><span class="section-icon" aria-hidden="true">⌖</span>Location</h2>
+        <div class="field-grid">
+          <div class="field"><label for="village">Village</label><input id="village" name="village" value="{{ form_lot.village|default('') }}" placeholder="Your village"></div>
+          <div class="field"><label for="district">District</label><input id="district" name="district" value="{{ form_lot.district|default('') }}" placeholder="Your district"></div>
+          <div class="field"><label for="state">State</label><input id="state" name="state" value="{{ form_lot.state|default('') }}" placeholder="Your state"></div>
+          <div class="field {% if form_errors.get('location') %}has-error{% endif %}"><label class="required" for="location">Market / Collection Location</label><input id="location" name="location" value="{{ form_lot.location|default('') }}" placeholder="e.g. Nashik APMC" required>{% if form_errors.get('location') %}<small class="field-error">{{ form_errors.get('location') }}</small>{% endif %}</div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="quality-heading">
+        <h2 class="section-heading" id="quality-heading"><span class="section-icon" aria-hidden="true">✦</span>Quality</h2>
+        <div class="field-grid">
+          <div class="field {% if form_errors.get('quality') %}has-error{% endif %}"><label class="required" for="quality">Quality Grade</label><select id="quality" name="quality" required><option value="">Select quality grade</option>{% for quality in ['Premium', 'Grade A', 'Grade B', 'Standard'] %}<option value="{{ quality }}" {% if form_lot.quality|default('') == quality %}selected{% endif %}>{{ quality }}</option>{% endfor %}</select>{% if form_errors.get('quality') %}<small class="field-error">{{ form_errors.get('quality') }}</small>{% endif %}</div>
+          <div class="field"><label for="farming_method">Organic / Conventional</label><select id="farming_method" name="farming_method"><option value="">Select farming method</option><option value="Organic" {% if form_lot.farming_method|default('') == 'Organic' %}selected{% endif %}>Organic</option><option value="Conventional" {% if form_lot.farming_method|default('') == 'Conventional' %}selected{% endif %}>Conventional</option></select></div>
+          <div class="field full"><label for="description">Description</label><textarea id="description" name="description" placeholder="Add details on size, moisture, sorting, packaging or storage.">{{ form_lot.description|default('') }}</textarea><small class="field-help">Optional details help buyers assess your produce quickly.</small></div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="image-heading">
+        <h2 class="section-heading" id="image-heading"><span class="section-icon" aria-hidden="true">▧</span>Produce Image</h2>
+        <label class="upload" for="produce_image"><span aria-hidden="true">↑</span><span><strong>Upload a produce image</strong>PNG, JPG or WEBP — a clear photo helps buyers trust your listing.</span><input id="produce_image" name="produce_image" type="file" accept="image/png,image/jpeg,image/webp"></label><p class="upload-name" id="upload-name">No image selected</p>
+      </section>
+
+      <div class="actions"><p class="required-note"><span>*</span> Required fields</p><a class="button button-secondary" href="{{ url_for('farmer_my_produce') }}">Cancel</a><button class="button button-primary" type="submit">Publish Produce</button></div>
+    </form>
+  </main>
+  <script>
+    const imageInput = document.querySelector('#produce_image');
+    const uploadName = document.querySelector('#upload-name');
+    imageInput.addEventListener('change', () => { uploadName.textContent = imageInput.files.length ? imageInput.files[0].name : 'No image selected'; });
+  </script>
+</body>
+</html>

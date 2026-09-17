@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Farmer marketplace dashboard for Khet2Market.">
+  <title>Farmer Dashboard | Khet2Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --forest:#153d2a; --leaf:#28734a; --leaf-dark:#1f5939; --lime:#e9f5df; --gold:#e8ab38; --ink:#203a2b; --muted:#6b7f73; --line:#dfebdf; --canvas:#f7faf5; --card:#fff; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; color:var(--ink); background:var(--canvas); font:15px/1.5 "DM Sans",sans-serif; }
+    a { color:inherit; } button { font:inherit; } .app-shell { min-height:100vh; display:grid; grid-template-columns:250px minmax(0,1fr); }
+    .sidebar { position:sticky; top:0; height:100vh; display:flex; flex-direction:column; padding:1.35rem 1rem; color:#eaf5e8; background:linear-gradient(165deg,#123b29,#1d6640); }
+    .brand { display:flex; align-items:center; gap:.6rem; padding:.25rem .6rem 1.6rem; color:#fff; font-size:1.18rem; font-weight:700; text-decoration:none; }.brand-mark { display:grid; width:30px; height:30px; place-items:center; border-radius:9px; color:var(--forest); background:#dcedae; font-size:.9rem; }
+    .nav-label { margin:.45rem .7rem .45rem; color:#b5d7b6; font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }.side-nav { display:grid; gap:.18rem; }.side-nav a { display:flex; align-items:center; gap:.7rem; padding:.68rem .7rem; border-radius:9px; color:#d7ebd8; text-decoration:none; transition:background .18s ease,color .18s ease; }.side-nav a:hover,.side-nav a.active { color:#fff; background:#ffffff18; }.side-nav a.active { box-shadow:inset 3px 0 #dcedae; }.nav-icon { width:18px; color:#dcedae; text-align:center; font-size:1rem; }.sidebar-footer { margin-top:auto; padding:.9rem .7rem .15rem; border-top:1px solid #ffffff22; }.sidebar-footer a { display:flex; align-items:center; gap:.7rem; color:#d7ebd8; text-decoration:none; }.sidebar-footer a:hover { color:#fff; }
+    .page { min-width:0; }.topbar { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:76px; padding:1rem clamp(1.25rem,3vw,2.5rem); border-bottom:1px solid var(--line); background:#fff; }.mobile-toggle { display:none; border:1px solid var(--line); border-radius:8px; color:var(--forest); background:#fff; padding:.42rem .58rem; cursor:pointer; }.page-context { color:var(--muted); font-size:.88rem; }.page-context strong { display:block; color:var(--forest); font-size:1rem; }.top-actions { display:flex; align-items:center; gap:.85rem; }.notice-link { position:relative; display:grid; width:36px; height:36px; place-items:center; border-radius:50%; color:var(--forest); background:#f0f7ed; text-decoration:none; }.notice-dot { position:absolute; top:7px; right:7px; width:7px; height:7px; border:1px solid white; border-radius:50%; background:var(--gold); }.user-chip { display:flex; align-items:center; gap:.58rem; color:var(--forest); font-weight:700; }.avatar { display:grid; width:36px; height:36px; place-items:center; border-radius:50%; color:#fff; background:var(--leaf); font-size:.83rem; }
+    main { width:min(100%,1440px); margin:auto; padding:clamp(1.25rem,3vw,2.4rem); }.flash-stack { display:grid; gap:.65rem; margin-bottom:1.25rem; }.flash { padding:.8rem 1rem; border:1px solid #cfe5c6; border-radius:10px; color:#245435; background:#edf8e8; }.welcome { display:flex; align-items:end; justify-content:space-between; gap:1.5rem; margin-bottom:1.65rem; }.eyebrow { margin:0 0 .25rem; color:var(--leaf); font-size:.73rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }.welcome h1 { margin:0; color:var(--forest); font-family:"Playfair Display",serif; font-size:clamp(1.8rem,3vw,2.55rem); line-height:1.15; }.welcome p:not(.eyebrow) { max-width:650px; margin:.55rem 0 0; color:var(--muted); }.primary-action,.secondary-action { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; padding:.68rem 1rem; border-radius:9px; font-weight:700; text-decoration:none; white-space:nowrap; }.primary-action { color:#fff; background:var(--leaf); box-shadow:0 7px 14px #28734a22; }.primary-action:hover { background:var(--leaf-dark); }.secondary-action { border:1px solid #cfe1cb; color:var(--leaf); background:#fff; }.secondary-action:hover { background:#f2f8ef; }
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.45rem; }.stat-card { min-width:0; padding:1.15rem; border:1px solid var(--line); border-radius:14px; background:var(--card); box-shadow:0 8px 22px #153d2a08; }.stat-top { display:flex; align-items:center; justify-content:space-between; gap:.5rem; color:var(--muted); font-size:.83rem; font-weight:600; }.stat-icon { display:grid; width:32px; height:32px; place-items:center; border-radius:9px; color:var(--leaf); background:var(--lime); }.stat-value { margin:.7rem 0 .15rem; color:var(--forest); font-size:1.65rem; font-weight:700; line-height:1; }.stat-note { color:var(--muted); font-size:.76rem; }
+    .dashboard-grid { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(280px,.85fr); gap:1.3rem; }.content-stack { display:grid; gap:1.3rem; }.panel { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:var(--card); box-shadow:0 8px 22px #153d2a08; }.panel-head { display:flex; align-items:start; justify-content:space-between; gap:1rem; padding:1.15rem 1.2rem; border-bottom:1px solid #edf2eb; }.panel-head h2 { margin:0; color:var(--forest); font-size:1.02rem; }.panel-head p { margin:.18rem 0 0; color:var(--muted); font-size:.8rem; }.text-link { color:var(--leaf); font-size:.82rem; font-weight:700; text-decoration:none; }.text-link:hover { text-decoration:underline; }.price-list { display:grid; }.price-row { display:grid; grid-template-columns:minmax(80px,1fr) auto auto; align-items:center; gap:1rem; padding:.9rem 1.2rem; border-bottom:1px solid #f0f4ef; }.price-row:last-child { border-bottom:0; }.crop { color:var(--forest); font-weight:700; }.market { color:var(--muted); font-size:.78rem; }.price { color:var(--forest); font-weight:700; }.trend { min-width:54px; padding:.22rem .38rem; border-radius:999px; font-size:.74rem; font-weight:700; text-align:center; }.up { color:#197142; background:#e7f6e9; }.down { color:#a5532b; background:#fff0e7; }.empty-state { padding:2rem 1.2rem; color:var(--muted); text-align:center; }.empty-state strong { display:block; margin-bottom:.25rem; color:var(--forest); }.empty-state a { color:var(--leaf); font-weight:700; }
+    .summary-list { display:grid; gap:.15rem; padding:.7rem 1.1rem; }.summary-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.66rem .1rem; border-bottom:1px solid #f0f4ef; }.summary-row:last-child { border-bottom:0; }.summary-row small { display:block; color:var(--muted); }.badge { display:inline-block; padding:.23rem .52rem; border-radius:999px; color:#276343; background:#e8f5e5; font-size:.72rem; font-weight:700; }.badge.pending { color:#956218; background:#fff4d7; }.quick-actions { display:grid; gap:.65rem; padding:1.1rem; }.quick-actions a { display:flex; align-items:center; justify-content:space-between; padding:.78rem .85rem; border:1px solid #d9ead4; border-radius:10px; color:var(--forest); background:#fbfdf9; font-weight:700; text-decoration:none; }.quick-actions a:hover { border-color:#9fc696; background:#f0f8ed; }.quick-actions span { color:var(--leaf); }.order-list { display:grid; }.order-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.8rem; padding:.9rem 1.2rem; border-bottom:1px solid #f0f4ef; }.order-row:last-child { border-bottom:0; }.order-title { color:var(--forest); font-weight:700; }.order-meta { margin-top:.15rem; color:var(--muted); font-size:.78rem; }.order-amount { color:var(--forest); font-size:.86rem; font-weight:700; text-align:right; }.order-amount .badge { margin-top:.3rem; }.notification-panel { scroll-margin-top:1rem; }
+    @media (max-width:1100px) { .stats { grid-template-columns:repeat(2,1fr); }.dashboard-grid { grid-template-columns:1fr; }.content-stack { grid-template-columns:repeat(2,minmax(0,1fr)); }.content-stack .full-width { grid-column:1 / -1; } }
+    @media (max-width:760px) { .app-shell { display:block; }.sidebar { position:fixed; z-index:10; top:0; left:0; width:260px; height:100vh; transform:translateX(-105%); transition:transform .2s ease; box-shadow:12px 0 32px #123b2930; }.sidebar.open { transform:translateX(0); }.mobile-toggle { display:inline-grid; place-items:center; }.topbar { min-height:64px; padding:.7rem 1rem; }.page-context { display:none; }.user-chip span { display:none; } main { padding:1.25rem 1rem 2rem; }.welcome { align-items:start; flex-direction:column; margin-bottom:1.25rem; }.stats,.content-stack { grid-template-columns:1fr; }.content-stack .full-width { grid-column:auto; }.price-row { grid-template-columns:minmax(70px,1fr) auto; }.price-row .market { display:none; } }
+    @media (max-width:390px) { .stats { gap:.7rem; }.stat-card { padding:1rem; }.top-actions { gap:.4rem; }.primary-action { width:100%; } }
+  </style>
+</head>
+<body>
+  {% set farmer_record = farmer|default({}) %}
+  {% set farmer_display_name = farmer_name|default(farmer_record.name|default('Farmer', true), true) %}
+  {% set recent_offers_data = recent_offers|default(offers|default([], true), true) %}
+  {% set recent_orders_data = recent_orders|default(orders|default([], true), true) %}
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Farmer navigation">
+      <a class="brand" href="{{ url_for('farmer_dashboard') }}"><span class="brand-mark" aria-hidden="true">K</span>Khet2Market</a>
+      <p class="nav-label">Farmer workspace</p>
+      <nav class="side-nav">
+        <a class="active" aria-current="page" href="{{ url_for('farmer_dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+        <a href="{{ url_for('farmer_market_intelligence') }}"><span class="nav-icon">◫</span>Market Prices</a>
+        <a href="{{ url_for('farmer_my_produce') }}"><span class="nav-icon">▦</span>My Produce</a>
+        <a href="{{ url_for('farmer_create_lot') }}"><span class="nav-icon">＋</span>Add Produce</a>
+        <a href="{{ url_for('farmer_offers') }}"><span class="nav-icon">✦</span>Offers</a>
+        <a href="{{ url_for('farmer_orders') }}"><span class="nav-icon">□</span>Orders</a>
+        <a href="{{ url_for('farmer_logistics') }}"><span class="nav-icon">↝</span>Logistics</a>
+        <a href="{{ url_for('farmer_payments') }}"><span class="nav-icon">₹</span>Payments</a>
+        <a href="{{ url_for('farmer_dashboard') }}#notifications"><span class="nav-icon">●</span>Notifications</a>
+        <a href="{{ url_for('farmer_grievances') }}"><span class="nav-icon">?</span>Support</a>
+        <a href="{{ url_for('farmer_profile') }}"><span class="nav-icon">◉</span>Profile</a>
+      </nav>
+      <div class="sidebar-footer"><a href="{{ url_for('login') }}"><span class="nav-icon">←</span>Logout</a></div>
+    </aside>
+
+    <div class="page">
+      <header class="topbar">
+        <button class="mobile-toggle" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div class="page-context"><strong>Farmer Dashboard</strong>Manage your marketplace activity</div>
+        <div class="top-actions">
+          <a class="notice-link" href="{{ url_for('farmer_dashboard') }}#notifications" aria-label="View notifications">♢<span class="notice-dot" aria-hidden="true"></span></a>
+          <a class="user-chip" href="{{ url_for('farmer_profile') }}"><span class="avatar">{{ farmer_display_name[:1]|upper }}</span><span>{{ farmer_display_name }}</span></a>
+        </div>
+      </header>
+
+      <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}<div class="flash-stack" aria-live="polite">{% for category, message in messages %}<div class="flash {{ category|default('', true) }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+        {% endwith %}
+
+        <section class="welcome" aria-labelledby="welcome-heading">
+          <div><p class="eyebrow">Your farm, connected</p><h1 id="welcome-heading">Good to see you, {{ farmer_display_name }}.</h1><p>Keep track of your produce, buyer interest and market opportunities from one place.</p></div>
+          <a class="primary-action" href="{{ url_for('farmer_create_lot') }}">＋ Add Produce</a>
+        </section>
+
+        <section class="stats" aria-label="Marketplace overview">
+          <article class="stat-card"><div class="stat-top"><span>Total Produce Listed</span><span class="stat-icon">▦</span></div><div class="stat-value">{{ total_produce_listed|default(produce_lots|length, true) }}</div><div class="stat-note">Lots in your marketplace</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Active Offers</span><span class="stat-icon">✦</span></div><div class="stat-value">{{ active_offers|default(pending_offers|default(recent_offers_data|length, true), true) }}</div><div class="stat-note">Buyer responses awaiting action</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Pending Orders</span><span class="stat-icon">□</span></div><div class="stat-value">{{ pending_orders|default(0, true) }}</div><div class="stat-note">Orders being fulfilled</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Total Earnings</span><span class="stat-icon">₹</span></div><div class="stat-value">₹{{ '{:,.0f}'.format(total_earnings|default(0, true)) }}</div><div class="stat-note">From completed orders</div></article>
+        </section>
+
+        <div class="dashboard-grid">
+          <div class="content-stack">
+            <section class="panel full-width" aria-labelledby="prices-heading">
+              <div class="panel-head"><div><h2 id="prices-heading">Today's Market Prices</h2><p>{% if is_demo|default(false) %}Indicative demo prices · not live market values{% else %}Latest available market snapshot{% endif %}</p></div><a class="text-link" href="{{ url_for('farmer_market_intelligence') }}">View all prices →</a></div>
+              {% if market_prices %}<div class="price-list">{% for item in market_prices[:4] %}<div class="price-row"><div><div class="crop">{{ item.crop|default(item['crop']) }}</div><div class="market">Market price per quintal</div></div><span class="price">₹{{ '{:,.0f}'.format(item.price|default(item['price'])) }}/Qtl</span><span class="trend {{ 'up' if item.change|default(item['change']) >= 0 else 'down' }}">{{ '↑' if item.change|default(item['change']) >= 0 else '↓' }} {{ '%+.1f'|format(item.change|default(item['change'])) }}%</span></div>{% endfor %}</div>{% else %}<div class="empty-state"><strong>No price updates yet</strong>Market prices will appear here when available.</div>{% endif %}
+            </section>
+
+            <section class="panel" aria-labelledby="offers-heading">
+              <div class="panel-head"><div><h2 id="offers-heading">Recent Offers</h2><p>Latest buyer interest in your produce</p></div><a class="text-link" href="{{ url_for('farmer_offers') }}">View offers →</a></div>
+              {% if recent_offers_data %}<div class="summary-list">{% for offer in recent_offers_data[:3] %}<div class="summary-row"><div><strong>{{ offer.produce|default(offer.crop|default('Produce')) }}</strong><small>{{ offer.buyer_name|default(offer.buyer|default('Buyer')) }}{% if offer.quantity is defined %} · {{ offer.quantity }}{% endif %}</small></div><span class="badge {{ 'pending' if offer.status|default('')|lower == 'pending' else '' }}">{{ offer.status|default('New')|title }}</span></div>{% endfor %}</div>{% else %}<div class="empty-state"><strong>No offers yet</strong>List produce to start receiving buyer offers. <a href="{{ url_for('farmer_create_lot') }}">Add a lot</a></div>{% endif %}
+            </section>
+
+            <section class="panel" id="notifications" aria-labelledby="summary-heading">
+              <div class="panel-head"><div><h2 id="summary-heading">Produce Summary</h2><p>Your most recent listed lots</p></div><a class="text-link" href="{{ url_for('farmer_my_produce') }}">Manage produce →</a></div>
+              {% if produce_lots %}<div class="summary-list">{% for lot in produce_lots[:3] %}<div class="summary-row"><div><strong>{{ lot.produce|default('Produce') }}</strong><small>{{ lot.quantity|default('—') }}</small></div><span class="badge {{ 'pending' if lot.status|default('')|lower in ['pending','draft'] else '' }}">{{ lot.status|default('Listed')|title }}</span></div>{% endfor %}</div>{% else %}<div class="empty-state"><strong>Your produce list is empty</strong>Add your first lot to find the right buyers.</div>{% endif %}
+            </section>
+
+            <section class="panel full-width" aria-labelledby="orders-heading">
+              <div class="panel-head"><div><h2 id="orders-heading">Recent Orders</h2><p>Track progress from confirmation to delivery</p></div><a class="text-link" href="{{ url_for('farmer_orders') }}">View all orders →</a></div>
+              {% if recent_orders_data %}<div class="order-list">{% for order in recent_orders_data[:3] %}<div class="order-row"><div><div class="order-title">{{ order.produce|default(order.lot_name|default('Produce order')) }}</div><div class="order-meta">{{ order.buyer_name|default(order.buyer|default('Buyer')) }}{% if order.quantity is defined %} · {{ order.quantity }}{% endif %}</div></div><div class="order-amount">{% if order.amount is defined %}₹{{ '{:,.0f}'.format(order.amount) }}{% elif order.final_price is defined %}₹{{ '{:,.0f}'.format(order.final_price) }}{% else %}—{% endif %}<br><span class="badge {{ 'pending' if order.status|default('')|lower in ['pending','processing'] else '' }}">{{ order.status|default('New')|title }}</span></div></div>{% endfor %}</div>{% else %}<div class="empty-state"><strong>No orders to show</strong>Confirmed orders will be visible here.</div>{% endif %}
+            </section>
+          </div>
+
+          <aside class="content-stack" aria-label="Dashboard actions">
+            <section class="panel"><div class="panel-head"><div><h2>Quick Actions</h2><p>Keep your market activity moving</p></div></div><div class="quick-actions"><a href="{{ url_for('farmer_create_lot') }}">Add Produce <span>→</span></a><a href="{{ url_for('farmer_market_intelligence') }}">Check Market Prices <span>→</span></a><a href="{{ url_for('farmer_offers') }}">View Offers <span>→</span></a></div></section>
+            <section class="panel notification-panel" aria-labelledby="notice-heading"><div class="panel-head"><div><h2 id="notice-heading">Marketplace Tip</h2><p>Make each lot easier to discover</p></div></div><div class="empty-state"><strong>Add quality and harvest details.</strong>Clear listings help buyers make faster, more confident decisions.</div></section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    const toggle = document.querySelector('.mobile-toggle');
+    const sidebar = document.querySelector('#sidebar');
+    toggle.addEventListener('click', () => { const open = sidebar.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(open)); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose how you want to use Khet2Market.">
+  <title>Choose Your Role | Khet2Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    :root { --pico-font-family: "DM Sans", sans-serif; --pico-primary: #276749; --pico-primary-hover: #1f553b; --leaf: #276749; --ink: #183227; --gold: #eeae39; }
+    body { min-height: 100vh; background: radial-gradient(circle at 50% 0, #edf6e8, #f9fbf7 43%, #f4f8f2); color: var(--ink); }.page-shell { width: min(100% - 2rem, 1180px); min-height: 100vh; margin: 0 auto; display: flex; flex-direction: column; padding: 2.2rem 0 1.5rem; }.page-header { text-align: center; }.brand { color: var(--leaf); font-size: 1.35rem; font-weight: 700; text-decoration: none; }.brand-mark { color: var(--gold); margin-right: .35rem; }.page-header h1 { margin: 1rem 0 .3rem; color: #153725; font-family: "Playfair Display", serif; font-size: clamp(2.25rem, 5vw, 3.3rem); }.page-header p { margin: 0; color: #667a6c; font-size: 1.05rem; }
+    .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; align-items: stretch; margin: clamp(2rem, 5vw, 4rem) 0 2rem; }.role-card { position: relative; display: flex; flex-direction: column; padding: 1.65rem; border: 1px solid #dce9d8; border-radius: 20px; background: white; box-shadow: 0 10px 25px #193a2410; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }.role-card:hover { transform: translateY(-6px); border-color: #9cc38c; box-shadow: 0 18px 32px #193a2420; }.role-card.selected { border: 2px solid var(--leaf); background: linear-gradient(145deg, #fff, #f3faef); box-shadow: 0 18px 35px #1c543a25; }.role-card:focus-visible { outline: 3px solid #e8ac35; outline-offset: 3px; }.role-icon { display: grid; width: 58px; height: 58px; place-items: center; border-radius: 16px; background: #edf7e9; color: var(--leaf); font-size: 1.8rem; }.role-card h2 { margin: 1.15rem 0 .55rem; color: #173f2b; font-family: "Playfair Display", serif; font-size: 1.85rem; }.role-card > p { min-height: 73px; margin: 0 0 1rem; color: #607568; line-height: 1.55; }.feature-list { flex: 1; margin: 0 0 1.5rem; padding: 0; list-style: none; }.feature-list li { margin: .55rem 0; color: #395f49; font-size: .92rem; }.feature-list li::before { content: "✓"; margin-right: .55rem; color: var(--leaf); font-weight: 700; }.selection-check { position: absolute; top: 1.25rem; right: 1.25rem; display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid #d8e5d4; border-radius: 50%; color: transparent; background: white; }.selected .selection-check { border-color: var(--leaf); color: white; background: var(--leaf); }.role-card button { width: 100%; margin: 0; }.role-card button:disabled { cursor: not-allowed; opacity: .55; }.selection-status { min-height: 1.4rem; margin: 0; color: #496d54; text-align: center; font-size: .9rem; }.selection-status strong { color: var(--leaf); }.page-footer { margin-top: auto; color: #718176; text-align: center; font-size: .82rem; }
+    @media (max-width: 800px) { .role-grid { grid-template-columns: 1fr; max-width: 520px; width: 100%; margin-right: auto; margin-left: auto; }.role-card > p { min-height: auto; }.role-card { padding: 1.4rem; } }.@media (max-width: 480px) { .page-shell { width: min(100% - 1.2rem, 1180px); padding-top: 1.4rem; } }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-header">
+      <a class="brand" href="{{ url_for('login') }}"><span class="brand-mark" aria-hidden="true">✦</span>Khet2Market</a>
+      <h1>Choose Your Role</h1>
+      <p>Select how you want to use Khet2Market.</p>
+    </header>
+
+    <section class="role-grid" aria-label="Choose a platform role">
+      <article class="role-card" data-role="Farmer" role="button" tabindex="0" aria-pressed="false">
+        <span class="selection-check" aria-hidden="true">✓</span><div class="role-icon" aria-hidden="true">🌾</div><h2>Farmer</h2>
+        <p>List your produce, discover better prices and connect with verified buyers.</p>
+        <ul class="feature-list"><li>Market Intelligence</li><li>Produce Listing</li><li>Buyer Matching</li><li>Digital Offers</li></ul>
+        <button type="button" disabled>Continue as Farmer</button>
+      </article>
+      <article class="role-card" data-role="FPO" role="button" tabindex="0" aria-pressed="false">
+        <span class="selection-check" aria-hidden="true">✓</span><div class="role-icon" aria-hidden="true">◉</div><h2>FPO</h2>
+        <p>Aggregate produce from farmers and access larger buyers.</p>
+        <ul class="feature-list"><li>Farmer Management</li><li>Produce Aggregation</li><li>Buyer Connections</li><li>Bulk Selling</li></ul>
+        <button type="button" disabled>Continue as FPO</button>
+      </article>
+      <article class="role-card" data-role="Buyer" role="button" tabindex="0" aria-pressed="false">
+        <span class="selection-check" aria-hidden="true">✓</span><div class="role-icon" aria-hidden="true">⌂</div><h2>Buyer</h2>
+        <p>Find quality agricultural produce from verified farmers and FPOs.</p>
+        <ul class="feature-list"><li>Search Produce</li><li>Buyer Requirements</li><li>Smart Matching</li><li>Digital Offers</li></ul>
+        <button type="button" disabled>Continue as Buyer</button>
+      </article>
+    </section>
+    <p id="selection-status" class="selection-status" role="status">Choose a role to continue.</p>
+    <footer class="page-footer">Khet2Market • Smart India Hackathon 2026 • PS 26132</footer>
+  </main>
+  <script>
+    const roleCards = document.querySelectorAll('.role-card');
+    const status = document.querySelector('#selection-status');
+
+    function selectRole(card) {
+      roleCards.forEach((item) => {
+        const selected = item === card;
+        item.classList.toggle('selected', selected);
+        item.setAttribute('aria-pressed', String(selected));
+        item.querySelector('button').disabled = !selected;
+      });
+      status.innerHTML = `<strong>${card.dataset.role}</strong> selected. Your dashboard route can be connected when available.`;
+    }
+
+    roleCards.forEach((card) => {
+      card.addEventListener('click', (event) => {
+        if (event.target.tagName !== 'BUTTON') selectRole(card);
+      });
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectRole(card); }
+      });
+      card.querySelector('button').addEventListener('click', () => selectRole(card));
+    });
+  </script>
+</body>
+</html>
